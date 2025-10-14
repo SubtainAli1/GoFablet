@@ -1,0 +1,354 @@
+d
+# Landing Page — README
+
+## What is included
+- `index.html` — main landing page
+- `thanks.html` — simple thank-you page
+- `assets/css/style.css` — styles (responsive)
+- `assets/js/main.js` — small JS utilities
+- `assets/img/` — placeholder images (replace with your images)
+
+## Google Tag Manager
+Paste the following in the `<head>` (replace `GTM-XXXXXXX` with your container ID):
+
+```html
+<!-- Google Tag Manager -->
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-XXXXXXX');
+</script>
+<!-- End Google Tag Manager -->
+```
+
+Also paste the following immediately after `<body>` opens (replace `GTM-XXXXXXX`):
+
+```html
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+```
+
+## Zoho form replacement
+Two places in the markup are prepared for a Zoho embed:
+
+- `#form-zoho` (hero section)
+- `#form-zoho-final` (final contact section)
+
+If you paste your Zoho embed code into one of these `div`s, the script will automatically hide the default local HTML form and show the Zoho form. No CSS changes should be necessary for responsiveness.
+
+## Form behavior
+- The default forms use JS to validate required fields and then redirect to `thanks.html` on success.
+- When replacing with a 3rd-party form, ensure the provider redirects to `thanks.html` or manually configure the redirect in their settings.
+
+## Click events (for analytics)
+- `Call` buttons: `tel:` links. They have a small analytics push (`clickCall`) if GTM/dataLayer exists.
+- `WhatsApp` button: you can add a link `https://wa.me/50212345678` where needed and it will behave like any external link.
+- `Form submit`: dataLayer `formSubmit` is pushed on success.
+
+## How to swap placeholders
+- Replace `assets/img/*.jpg` and `assets/img/*.png` with your real images. Keep the filenames or update `index.html` accordingly.
+- Replace phone number placeholders (`+50212345678`) with the real `tel:` value.
+- Replace `GTM-XXXXXXX` with your GTM container id.
+
+## Deploy to S3 + CloudFront
+1. Upload all files to an S3 bucket configured for static website hosting.
+2. Use CloudFront to point to the S3 bucket for CDN.
+3. Set `index.html` as the root document and `thanks.html` as a reachable page.
+
+<!doctype html>
+<html lang="en">
+<head>
+  <style>
+    .thankyou-banner {
+      background: #3A8671;
+      color: #fff;
+      text-align: center;
+      padding: 4rem 1rem;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      position: relative;
+    }
+    .thankyou-banner h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin: 0;
+    }
+    .thankyou-info {
+      max-width: 90vw;
+      margin: 2rem auto 0 auto;
+      padding: 1rem 2rem;
+      font-size: 1.3rem;
+      color: #111;
+    }
+    .thankyou-info .brand {
+      color: #5fc983;
+      font-weight: bold;
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    .thankyou-info .phone {
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0;
+    }
+    .thankyou-info .phone span {
+      font-weight: 500;
+      color: #111;
+    }
+  
+    .thankyou-banner {
+      background: #3A8671;
+      color: #fff;
+      text-align: center;
+      padding: 4rem 1rem;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      position: relative;
+    }
+    .thankyou-banner h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin: 0;
+    }
+  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thanks</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+   <header class="site-header">
+    <div class="container header-grid">
+      <div class="col logo">
+        <img src="assets/img/logo.png" alt="Company logo" id="logo" />
+      </div>
+      <div class="col call">
+        <a href="tel: +502 44775101" class="call-link" data-analytics="call-button">
+          <span class="icon" aria-hidden="true">📞</span>
+          <span class="call-number">Llámanos al: +502 44775101</span>
+        </a>
+      </div>
+      <div class="col locate">
+        <a href="https://www.google.com/maps/place/Gofablet+Repair+iPhone+and+Guatemala+phones/@14.6007897,-90.5158514,17z/data=!3m1!4b1!4m6!3m5!1s0x8589a3c8a46ca17f:0xe1faf62ebed69b61!8m2!3d14.6007897!4d-90.5158514!16s%2Fg%2F11b806pfjl?entry=ttu&g_ep=EgoyMDI1MTAwNC4wIKXMDSoASAFQAw%3D%3D" class="locate-link">
+          <span class="icon" aria-hidden="true">📍</span>
+          <span>Locate Us:Edificio, Reforma Montúfar, Avenida La Reforma 12, Cdad. de Guatemala 01010, Guatemala</span>
+        </a>
+      </div>
+    </div>
+  </header>
+  <section class="thankyou-banner">
+    <h1>Gracias por contactar con nosotras!</h1>
+  </section>
+  <section class="thankyou-info">
+    <p>¡Agradecemos su consulta! Nuestro equipo ha recibido su solicitud y se pondrá en contacto con usted lo antes posible.</p>
+    <p class="brand">Gofablet</p>
+    <a href="tel: +502 44775101" class="call-link" data-analytics="call-button">
+          <span class="icon" aria-hidden="true">📞</span>
+          <span class="call-number">Llámanos al: +502 44775101</span>
+        </a>
+  </section>
+   <footer class="site-footer">
+    <div class="container">
+      <p>Derechos de autor© 2025 </p>
+    </div>
+  </footer>
+ 
+</body>
+</html>
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Landing page - lightweight responsive" />
+  <meta property="og:title" content="Shining Star Electronics" />
+  <meta property="og:description" content="Short description here" />
+  <meta property="og:image" content="assets/img/og-image.jpg" />
+  <title>Shining Star Electronics — Landing</title>
+
+  <!-- Google Tag Manager (head) — replace GTM-XXXXXXX with your ID -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <!-- Google Tag Manager (body) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End GTM (body) -->
+
+  <header class="site-header">
+    <div class="container header-grid">
+      <div class="col logo">
+        <img src="assets/img/logo.png" alt="Company logo" id="logo" />
+      </div>
+      <div class="col call">
+        <a href="tel: +502 44775101" class="call-link" data-analytics="call-button">
+          <span class="icon" aria-hidden="true">📞</span>
+          <span class="call-number">Llámanos al: +502 44775101</span>
+        </a>
+      </div>
+      <div class="col locate">
+        <a href="https://www.google.com/maps/place/Gofablet+Repair+iPhone+and+Guatemala+phones/@14.6007897,-90.5158514,17z/data=!3m1!4b1!4m6!3m5!1s0x8589a3c8a46ca17f:0xe1faf62ebed69b61!8m2!3d14.6007897!4d-90.5158514!16s%2Fg%2F11b806pfjl?entry=ttu&g_ep=EgoyMDI1MTAwNC4wIKXMDSoASAFQAw%3D%3D" class="locate-link">
+          <span class="icon" aria-hidden="true">📍</span>
+          <span>Locate Us:Edificio, Reforma Montúfar, Avenida La Reforma 12, Cdad. de Guatemala 01010, Guatemala</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION 1: HERO + CONTACT -->
+
+  <section id="section-1" class="hero">
+    <div class="hero-bg"></div>
+
+    <div class="container hero-grid">
+      <div class="hero-left">
+        <img src="assets/img/gofablet web new text png.png" alt="Headline image" class="headline-img desktop-only">
+        <img src="assets/img/gofablet mobile text png.png" alt="Headline image" class="headline-img mobile-only">
+
+        <a href="tel:+502 5991 3545" class="btn large call-us" data-analytics="hero-call">Llámanos al: +502 5991 3545</a>
+      </div>
+
+      <div class="hero-right">
+        <!-- Default contact form (can be replaced by Zoho form). -->
+        <div id="form-wrapper">
+          <form id="contact-form" class="contact-form" novalidate>
+            <label>
+              <span class="label-text">Name</span>
+              <input type="text" name="name" required />
+            </label>
+            <label>
+              <span class="label-text">Phone</span>
+              <input type="tel" name="phone" required />
+            </label>
+            <label>
+              <span class="label-text">Tell us about device issue</span>
+              <textarea name="message" rows="4" required></textarea>
+            </label>
+            <button type="submit" class="btn submit" data-analytics="form-submit">Submit</button>
+          </form>
+
+          <!-- Zoho form placeholder: paste Zoho embed here -->
+          <div id="form-zoho" style="display:none;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTIONS 2 - 5: Image-only sections with buttons -->
+
+  <section class="media-section" id="section-2">
+    <picture>
+      <source media="(max-width:599px)" srcset="assets/img/gofablet-mobile2.jpg">
+      <img src="assets/img/gofablet-desktop2.jpg" alt="Section 2" />
+    </picture>
+    <div class="section-actions">
+      <a href="tel:+502 5991 3545" class="btn">Llámanos al: +502 5991 3545</a>
+      <a href="#section-1" class="btn btn-secondary" data-scroll>¡Obtenga una cotización gratis hoy!</a>
+    </div>
+  </section>
+
+  <section class="media-section" id="section-3">
+    <picture>
+      <source media="(max-width:599px)" srcset="assets/img/gofabletdesktop3.jpg">
+      <img src="assets/img/gofablet-mobile03.jpg" alt="Section 3" />
+    </picture>
+    <div class="section-actions">
+      <a href="tel:+502 5991 3545" class="btn">Llámanos al: +502 5991 3545</a>
+      <a href="#section-1" class="btn btn-secondary" data-scroll>¡Obtenga una cotización gratis hoy!</a>
+    </div>
+  </section>
+
+  <section class="media-section" id="section-4">
+    <picture>
+      <source media="(max-width:599px)" srcset="assets/img/gofablet-mobile4.jpg">
+      <img src="assets/img/gofablet-desktop4.jpg" alt="Section 4" />
+    </picture>
+    <div class="section-actions">
+      <a href="tel:+502 5991 3545" class="btn">Llámanos al: +502 5991 3545</a>
+      <a href="#section-1" class="btn btn-secondary" data-scroll>¡Obtenga una cotización gratis hoy!</a>
+    </div>
+  </section>
+
+  <section class="media-section" id="section-5">
+    <picture>
+      <source media="(max-width:599px)" srcset="assets/img/gofablet-mobile05.jpg">
+      <img src="assets/img/gofablet-desktop05.jpg" alt="Section 5" />
+    </picture>
+    <div class="section-actions">
+      <a href="tel:+502 5991 3545" class="btn">Llámanos al: +502 5991 3545</a>
+      <a href="#section-1" class="btn btn-secondary" data-scroll>¡Obtenga una cotización gratis hoy!</a>
+    </div>
+  </section>
+
+  <!-- SECTION 6: Final contact + map -->
+  <section class="final-contact" id="final-contact">
+    <div class="container final-grid">
+      <div class="final-left">
+        <img src="assets/img/gofablet-desktop06.jpg" alt="Left image" />
+      </div>
+      <div class="final-right">
+        <div id="final-form-wrapper">
+          <form id="contact-form-2" class="contact-form" novalidate>
+            <label>
+              <span class="label-text">Name</span>
+              <input type="text" name="name" required />
+            </label>
+            <label>
+              <span class="label-text">Phone</span>
+              <input type="tel" name="phone" required />
+            </label>
+            <label>
+              <span class="label-text">Tell us about device issue</span>
+              <textarea name="message" rows="4" required></textarea>
+            </label>
+            <button type="submit" class="btn submit" data-analytics="form-submit-final">Submit</button>
+          </form>
+
+          <div id="form-zoho-final" style="display:none;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- mobile arrangement: map image on top then form -->
+    <!-- <div class="mobile-map mobile-only">
+      <img id="map" src="assets/img/gofablet-desktop06.jpg" alt="Map" />
+    </div> -->
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Shining Star Electronics. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Disable left click (context menu and selection)
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+      });
+      document.body.addEventListener('mousedown', function(e) {
+        if (e.button === 0) {
+          e.preventDefault();
+        }
+      });
+      document.body.addEventListener('selectstart', function(e) {
+        e.preventDefault();
+      });
+    });
+  </script>
+</body>
+</html>
