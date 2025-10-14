@@ -1,0 +1,149 @@
+/* Add gap before section-2 */
+#section-2 {
+  margin-top: 2.5rem;
+}
+html, body {
+  overflow-x: hidden;
+}
+@media (max-width: 599px) {
+  .header-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  .header-grid .logo,
+  .header-grid .call,
+  .header-grid .locate {
+    text-align: center;
+    margin-bottom: 0.25rem;
+  }
+}
+@media (max-width: 899px) {
+  .header-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    text-align: center;
+  }
+  .header-grid .logo,
+  .header-grid .call,
+  .header-grid .locate {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+}
+.col.locate .locate-link {
+  word-break: break-word;
+  white-space: normal;
+  max-width: 100%;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  text-align: center;
+}
+@media (max-width: 599px) {
+  .media-section img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+/* Desktop/mobile image visibility helpers */
+.desktop-only { display: block; }
+.mobile-only { display: none; }
+
+/* Lightweight responsive styles - no frameworks */
+:root{--max-width:1200px;--accent:#0078ff;--muted:#666}
+*{box-sizing:border-box}
+body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0;color:#222;background:#fff}
+.container{max-width:var(--max-width);margin:0 auto;padding:1rem}
+.header-grid{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;padding:1.5rem 0;max-width:100vw;box-sizing:border-box;}
+.header-grid {
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+  box-sizing: border-box;
+  max-width: 100vw;
+.header-grid .col{text-align:center}
+.header-grid .logo{text-align:left}
+.header-grid .call{text-align:center}
+.header-grid .locate{text-align:right}
+.logo img{height: 30px}
+.call-link{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;color:inherit}
+.site-header{background:#fff;position:static;z-index:100;border-bottom:1px solid #eee;min-height:100px;}
+
+/* Hero */
+.hero{position:relative;color:#fff;padding:5rem 0 4rem 0;min-height:520px;}
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+  background-image: url('../img/gofablet-hero-background-desktop.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #222;
+}
+
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;position:relative;align-items:center;z-index:3;}
+@media (max-width: 599px) {
+  .hero-bg {
+    background-image: url('../img/gofablet mobile background png.png');
+  }
+}
+.hero-left .headline-img{max-width:100%}
+.btn{margin-top:  30px; display:inline-block;padding:.75rem 1.25rem;border-radius:8px;text-decoration:none;background:#3A8671;color:#fff;border:0}
+.btn.secondary, .btn.btn-secondary{
+  background: #AB282D;
+  color: #fff;
+  border: 1px solid #AB282D;
+}
+.btn.large{font-size:1.1rem;padding:1rem 1.5rem}
+.contact-form{background:#fff;padding:1rem;border-radius:8px;color:#222;box-shadow:0 8px 24px rgba(24,24,24,0.08)}
+.contact-form label{display:block;margin-bottom:.75rem}
+.contact-form input,.contact-form textarea{width:100%;padding:.5rem;border:1px solid #ddd;border-radius:6px}
+.section-actions{text-align:center;padding:1.5rem 0}
+.section-actions .btn{margin:0 .5rem}
+.media-section img{max-width:1000px;max-height:600px;width:100%;height:auto;object-fit:contain;display:block;margin:0 auto;}
+
+/* Final contact */
+.final-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;padding:2rem 0}
+.final-left img{width:100%;display:block}
+.mobile-map{display:none}
+
+/* Footer */
+.site-footer{background:#3A8671;color:#fff;padding:1rem;text-align:center}
+
+/* Responsive */
+@media (max-width:899px){
+  .hero-grid{grid-template-columns:1fr;top:-90px;padding-bottom:1rem}
+  .header-grid{grid-template-columns:1fr 1fr;gap:1rem}
+
+}
+@media (max-width:599px){
+  .header-grid{grid-template-columns:1fr 1fr 1fr}
+  .desktop-only{display:none}
+  .mobile-only{display:block}
+  .hero-bg img{height:300px}
+  .final-grid{grid-template-columns:1fr}
+  .mobile-map{display:block;margin:1rem 0}
+  .site-header{padding:.5rem 0}
+  .btn{width:100%;display:block;margin:0.5rem 0;border-radius:10px}
+  .section-actions .btn{
+    width:100%;
+    display:block;
+    margin:0.5rem 0;
+  }
+}
+
+/* small helpers */
+.hidden{display:none!important}
+
+/* Accessibility enhancements */
+a:focus, button:focus, input:focus, textarea:focus{outline:3px solid rgba(0,120,255,0.18);outline-offset:2px}
